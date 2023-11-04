@@ -1,0 +1,37 @@
+SpringBoot Day 1
+================
+Product - Bread & Butter
+
+Server: Amazon.com
+Frontend:
+1. UI - User Experience (UX) - 5%
+Backend:
+2. Middle layer / Web Services / RESTful APIs 85%
+	- Endpoints
+	- Bussiness
+	- Data Access Layer - DAO <- Queries (JDBC)
+3. DB (select * from iphone 14 table) - 10%
+
+Frontend: HTML(index.html), CSS/bootstrap, JS
+	- ReactJS, VueJS
+
+Backend:
+Middle layer - SpringBoot framework
+DB - SQL - Oracle, MySql, SQLDevelop
+   	- JSON - MongoDB, CosmosDB, DynamoDB, ScyllaDB
+
+Requirements Spring Boot:
+IDE - Spring STS (Eclipse) https://spring.io/tools
+Java - 17
+
+Dependency Injection:
+- Without using new keyword, spring can create object (singleton), if we use @Component. (ConfigurableApplicationContext obj getBean(classname.class))
+- @Autowired is also do dependency injection
+
+Keywords/Annotaions:
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+https://www.javatpoint.com/spring-boot-annotations
+- @SpringBootApplication - on top of the class has main method. And inside main method there should be SpringApplication.run(currentclassname.class, args);
+- @RestController - Refer to rest api endpoints on top of the class
+- @GetMapping - GET request on top of method
+- @Scope(value = "prototype") after @Component - we use it not to create objects as singleton
