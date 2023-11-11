@@ -12,6 +12,11 @@ public class Department {
 		System.out.println("This is from department");
 	}
 	
+	public Department(Integer departmentId, String departmentName) {
+		this.departmentId = departmentId;
+		this.departmentName = departmentName;
+	}
+	
 	public Integer getDepartmentId() {
 		return departmentId;
 	}

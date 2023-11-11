@@ -1,0 +1,7 @@
+Ref:
+@PathVariable : for endpoint path values
+@RequestBody : Request Json Body
+@PutRequest : Define PUT HTTP request
+@DeleteRequest : Define DELETE HTTP request
+method = RequestMethod.POST/PUT
+value = "/endpoint"
