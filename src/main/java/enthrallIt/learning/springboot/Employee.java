@@ -1,21 +1,24 @@
 package enthrallIt.learning.springboot;
 
 import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope(value = "prototype")
+@Entity
+//@Component
+//@Scope(value = "prototype")
 public class Employee {
 
+	@Id
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private LocalDate dob;
-	@Autowired
-	private Department department;
+	//@Autowired
+	//@ManyToOne
+	//private Integer departmentId;
+	//private Department department;
 	
 	public Employee() {
 		System.out.println("This is Employee Default Constructor");
@@ -27,6 +30,14 @@ public class Employee {
 		this.lastName = lastName;
 		this.dob = dob;
 	}
+	
+//	public Employee(Long id, String firstName, String lastName, LocalDate dob, Integer departmentId) {
+//		this.id = id;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.dob = dob;
+//		this.departmentId = departmentId;
+//	}
 	
 	public Long getId() {
 		return id;
@@ -60,20 +71,16 @@ public class Employee {
 		this.dob = dob;
 	}
 	
-	public Department getDepartment() {
-		return department;
-	}
-	
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
+//	public Integer getDepartment() {
+//		return departmentId;
+//	}
+//	
+//	public void setDepartment(Integer departmentId) {
+//		this.departmentId = departmentId;
+//	}
 	
 	public String fullName() {
 		return getFirstName() + " " + getLastName();
 	}
-	
-	public void getLog() {
-		System.out.println("Logging : Employee class object");
-		department.getLog();
-	}
+
 }

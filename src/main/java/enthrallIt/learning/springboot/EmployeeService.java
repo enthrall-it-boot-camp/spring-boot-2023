@@ -1,54 +1,48 @@
 package enthrallIt.learning.springboot;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
 
-	private List<Employee> employees = new ArrayList<>(List.of(
-			new Employee(101L, "MS", "Dhoni", LocalDate.of(1988, Month.APRIL, 26)),
-			new Employee(102L, "Sakib", "Al Hasan", LocalDate.of(1999, Month.JANUARY, 2)),
-			new Employee(103L, "Rickey", "Ponting", LocalDate.of(2000, Month.DECEMBER, 6))
-			));
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	public List<Employee> getAllEmployees(){
+		ArrayList<Employee> employees = new ArrayList<>();
+		
+		for(Employee employee: employeeRepository.findAll()) {
+			employees.add(employee);
+		}
 		return employees;
 	}
 	
-	public Employee getEmployee(Long id) {
-		Employee employee = null;
-		for(Employee employe : employees) {
-			if(employe.getId().equals(id)) {
-				employee = employe;
-			}
+	public Optional<Employee> getEmployee(Long id) {
+		if(employeeRepository.existsById(id)) {
+			return employeeRepository.findById(id);
+		}else {
+			throw new IllegalStateException("Employee not found");
 		}
-		return employee;
 	}
 	
 	public void createEmployee(Employee employee) {
-		employees.add(employee);
+		employeeRepository.save(employee);
 	}
 	
 	public void deleteEmployee(Long id) {
-		for(Employee employee: employees) {
-			if(employee.getId().equals(id)) {
-				employees.remove(employee);
-			}
+		if(employeeRepository.existsById(id)) {
+			employeeRepository.deleteById(id);
 		}
 	}
 	
 	public void updateEmployee(Employee employee, Long id) {
-		int index = 0;
-		for(Employee employe: employees) {
-			if(employe.getId().equals(id)) {
-				employees.set(index,employee);
-			}
-			index++;
+		if(employeeRepository.existsById(id)) {
+			employeeRepository.save(employee);
 		}
 	}
 }

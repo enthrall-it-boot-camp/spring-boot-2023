@@ -1,36 +1,37 @@
 package enthrallIt.learning.springboot;
 
-import org.springframework.stereotype.Component;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@Component("dept")
+@Entity
 public class Department {
 	
-	private Integer departmentId;
-	private String departmentName;
+	@Id
+	private Integer id;
+	private String name;
 	
 	public Department() {
 		System.out.println("This is from department");
 	}
 	
-	public Department(Integer departmentId, String departmentName) {
-		this.departmentId = departmentId;
-		this.departmentName = departmentName;
+	public Department(Integer id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 	
 	public Integer getDepartmentId() {
-		return departmentId;
-	}
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
-	public String getDepartmentName() {
-		return departmentName;
-	}
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+		return id;
 	}
 	
-	public void getLog() {
-		System.out.println("Logging : Department Class object");
+	public void setDepartmentId(Integer departmentId) {
+		this.id = departmentId;
+	}
+	
+	public String getDepartmentName() {
+		return name;
+	}
+	
+	public void setDepartmentName(String departmentName) {
+		this.name = departmentName;
 	}
 }
