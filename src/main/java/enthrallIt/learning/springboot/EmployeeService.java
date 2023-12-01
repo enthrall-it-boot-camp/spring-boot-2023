@@ -2,8 +2,6 @@ package enthrallIt.learning.springboot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +20,16 @@ public class EmployeeService {
 		return employees;
 	}
 	
-	public Optional<Employee> getEmployee(Long id) {
-		if(employeeRepository.existsById(id)) {
-			return employeeRepository.findById(id);
-		}else {
-			throw new IllegalStateException("Employee not found");
-		}
+	public Employee getEmployee(Long id) {
+		return employeeRepository.findById(id).orElseThrow(()-> new EmployeeNotFoundException("Employee not found"));
 	}
 	
-	public void createEmployee(Employee employee) {
-		employeeRepository.save(employee);
+	public List<Employee> getEmployee(String lastName) {
+		return employeeRepository.findByLastName(lastName);
+	}
+
+	public Employee createEmployee(Employee employee) {
+		return employeeRepository.save(employee);
 	}
 	
 	public void deleteEmployee(Long id) {
@@ -40,9 +38,7 @@ public class EmployeeService {
 		}
 	}
 	
-	public void updateEmployee(Employee employee, Long id) {
-		if(employeeRepository.existsById(id)) {
-			employeeRepository.save(employee);
-		}
+	public Employee updateEmployee(Employee employee, Long id) {
+		 return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Employe Not Found"));
 	}
 }
