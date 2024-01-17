@@ -1,31 +1,52 @@
 package enthrallIt.learning.springboot;
 
 import java.time.LocalDate;
+import java.time.Period;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-@Component
-@Scope(value = "prototype")
+@Entity
+@Table(name = "EMPLOYEE_DATA")
+//@Component
+//@Scope(value = "prototype")
 public class Employee {
 
+	@Id
+	@GeneratedValue
 	private Long id;
+	
+	@NotBlank(message = "First Name should not blank")
 	private String firstName;
+	
+	@NotBlank(message = "Last Name should not blank")
 	private String lastName;
+	
+	@Column(name = "DATE_OF_BIRTH")
+	@NotNull(message = "Date of birth should not blank")
 	private LocalDate dob;
-	@Autowired
-	private Department department;
+	
+	@Transient
+	private String fullName;
+	
+	private String age;
 	
 	public Employee() {
 		System.out.println("This is Employee Default Constructor");
 	}
 	
-	public Employee(Long id, String firstName, String lastName, LocalDate dob) {
-		this.id = id;
+	public Employee(String firstName, String lastName, LocalDate dob) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dob = dob;
+		this.fullName = getFullName();
+		this.age = getAge();
 	}
 	
 	public Long getId() {
@@ -60,20 +81,21 @@ public class Employee {
 		this.dob = dob;
 	}
 	
-	public Department getDepartment() {
-		return department;
+	public String getFullName() {
+		return firstName+" "+lastName;
 	}
 	
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getAge() {
+		return Period.between(dob, LocalDate.now()).getYears() + " Years "
+		+ Period.between(dob, LocalDate.now()).getMonths() + " Months "
+		+ Period.between(dob, LocalDate.now()).getDays() + " Days";
 	}
 	
-	public String fullName() {
-		return getFirstName() + " " + getLastName();
-	}
-	
-	public void getLog() {
-		System.out.println("Logging : Employee class object");
-		department.getLog();
+	public void setAge(String age) {
+		this.age = age;
 	}
 }

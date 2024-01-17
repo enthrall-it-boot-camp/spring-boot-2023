@@ -1,0 +1,10 @@
+Security in Spring Boot:
+5 Categories:
+- Authentication (User/Pass) [SSO (Single Sign On, OKTA, Authentication)]
+- Authorization (Application Level Authorization)
+- Principle (Policy)
+- Roles (ADMIN, USER)
+- Granted Authority (Groups Permission, AD (Active Directory))
+
+Validation, Security, Exception Handling, Custom Exception, Response Code
+JPA Create Method to get a query

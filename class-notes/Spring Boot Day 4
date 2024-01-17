@@ -1,0 +1,17 @@
+Features:
+- Application
+- Controller (spring-starter-web)
+- Service
+- DAO/Entity (spring-starter-jpa)
+- DTO
+- Repository (spring-starter-jpa)
+- Validation (spring-starter-validation)
+- Security (spring-starter-security)
+- Tests (spring-starter-test)
+
+Requirements:
+- If Employee has same name and same dob, then system should not allow
+- Name and DOB fields should not empty
+- To create an employee, only three fields will required. FirstName, LastName, DOB
+- GET employee should return five fields, id, first name, last name, dob and age
+- this portal is for admin, and admin requires password
